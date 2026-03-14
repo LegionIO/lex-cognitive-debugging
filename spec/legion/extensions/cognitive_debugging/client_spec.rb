@@ -26,10 +26,10 @@ RSpec.describe Legion::Extensions::CognitiveDebugging::Client do
     engine = Legion::Extensions::CognitiveDebugging::Helpers::DebuggingEngine.new
     client = described_class.new(engine: engine)
     result = client.detect_error(
-      error_type: :overconfidence,
-      description: 'Test injection',
-      severity: 0.5,
-      source_phase: :tick,
+      error_type:              :overconfidence,
+      description:             'Test injection',
+      severity:                0.5,
+      source_phase:            :tick,
       confidence_at_detection: 0.8
     )
     expect(result[:success]).to be true

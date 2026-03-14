@@ -14,7 +14,7 @@ RSpec.describe Legion::Extensions::CognitiveDebugging::Helpers::DebuggingEngine 
   end
 
   def add_error(overrides = {})
-    engine.detect_error(**base_error_args.merge(overrides))
+    engine.detect_error(**base_error_args, **overrides)
   end
 
   describe '#initialize' do
@@ -39,7 +39,7 @@ RSpec.describe Legion::Extensions::CognitiveDebugging::Helpers::DebuggingEngine 
     end
 
     it 'returns nil for invalid error_type' do
-      result = engine.detect_error(**base_error_args.merge(error_type: :not_real))
+      result = engine.detect_error(**base_error_args, error_type: :not_real)
       expect(result).to be_nil
     end
 
@@ -51,7 +51,7 @@ RSpec.describe Legion::Extensions::CognitiveDebugging::Helpers::DebuggingEngine 
 
     it 'stores all valid error types without error' do
       Legion::Extensions::CognitiveDebugging::Helpers::Constants::ERROR_TYPES.each do |type|
-        result = engine.detect_error(**base_error_args.merge(error_type: type))
+        result = engine.detect_error(**base_error_args, error_type: type)
         expect(result).not_to be_nil
       end
     end

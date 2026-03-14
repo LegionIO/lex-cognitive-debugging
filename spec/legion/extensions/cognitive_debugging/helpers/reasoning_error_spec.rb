@@ -152,8 +152,8 @@ RSpec.describe Legion::Extensions::CognitiveDebugging::Helpers::ReasoningError d
     it 'returns a hash with expected keys' do
       h = error.to_h
       expect(h).to include(:id, :error_type, :description, :severity, :severity_label,
-                            :source_phase, :confidence_at_detection, :status,
-                            :trace_ids, :correction_ids, :created_at, :resolved_at)
+                           :source_phase, :confidence_at_detection, :status,
+                           :trace_ids, :correction_ids, :created_at, :resolved_at)
     end
 
     it 'returns dup of trace_ids array' do

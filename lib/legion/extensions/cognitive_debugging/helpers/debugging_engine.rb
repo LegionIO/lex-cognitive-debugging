@@ -97,7 +97,7 @@ module Legion
           end
 
           def most_effective_strategy
-            applied = @corrections.values.select { |c| !c.effectiveness.nil? }
+            applied = @corrections.values.reject { |c| c.effectiveness.nil? }
             return nil if applied.empty?
 
             by_strategy = applied.group_by(&:strategy)
@@ -116,7 +116,7 @@ module Legion
             applied = @corrections.values.select(&:applied)
             return 0.0 if applied.empty?
 
-            measured = applied.select { |c| !c.effectiveness.nil? }
+            measured = applied.reject { |c| c.effectiveness.nil? }
             return 0.0 if measured.empty?
 
             effective_count = measured.count(&:effective?)
@@ -125,16 +125,16 @@ module Legion
 
           def debugging_report
             {
-              total_errors:           @errors.size,
-              active_errors:          active_errors.size,
-              resolved_errors:        resolved_errors.size,
-              total_traces:           @traces.size,
-              total_corrections:      @corrections.size,
+              total_errors:            @errors.size,
+              active_errors:           active_errors.size,
+              resolved_errors:         resolved_errors.size,
+              total_traces:            @traces.size,
+              total_corrections:       @corrections.size,
               correction_success_rate: correction_success_rate,
-              most_common_error_type: most_common_error_type,
+              most_common_error_type:  most_common_error_type,
               most_effective_strategy: most_effective_strategy,
-              errors_by_type:         errors_by_type,
-              error_rate_by_phase:    error_rate_by_phase
+              errors_by_type:          errors_by_type,
+              error_rate_by_phase:     error_rate_by_phase
             }
           end
 

@@ -16,7 +16,7 @@ RSpec.describe Legion::Extensions::CognitiveDebugging::Runners::CognitiveDebuggi
   end
 
   def detect_one(overrides = {})
-    client.detect_error(**base_error_kwargs.merge(overrides))
+    client.detect_error(**base_error_kwargs, **overrides)
   end
 
   describe '#detect_error' do
@@ -37,13 +37,13 @@ RSpec.describe Legion::Extensions::CognitiveDebugging::Runners::CognitiveDebuggi
     end
 
     it 'returns success: false for invalid error_type' do
-      result = client.detect_error(**base_error_kwargs.merge(error_type: :not_real))
+      result = client.detect_error(**base_error_kwargs, error_type: :not_real)
       expect(result[:success]).to be false
       expect(result[:error]).to eq(:invalid_error_type)
     end
 
     it 'returns valid error types on failure' do
-      result = client.detect_error(**base_error_kwargs.merge(error_type: :bogus))
+      result = client.detect_error(**base_error_kwargs, error_type: :bogus)
       expect(result[:valid]).to include(:inconsistency)
     end
 

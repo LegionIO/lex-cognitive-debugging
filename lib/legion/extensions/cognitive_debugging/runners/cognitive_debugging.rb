@@ -27,7 +27,7 @@ module Legion
                                    "phase=#{source_phase} severity=#{err.severity_label}"
               { success: true, error_id: err.id, error_type: error_type, severity_label: err.severity_label }
             else
-              Legion::Logging.warn "[cognitive_debugging] detect_error: engine returned nil (cap reached?)"
+              Legion::Logging.warn '[cognitive_debugging] detect_error: engine returned nil (cap reached?)'
               { success: false, error: :cap_reached }
             end
           end
